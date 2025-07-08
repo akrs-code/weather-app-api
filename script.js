@@ -32,7 +32,7 @@ async function getWeatherData(city) {
 }
 function dislayWeatherInfo(data) {
     console.log(data)
-    const { name: city, main: { temp, humidity }, weather: [{ description }]} = data;
+    const { name: city, main: { temp, humidity }, weather: [{ description }], sys:{country}} = data;
 
     card.textContent = "";
     card.style.display = "flex"
@@ -41,8 +41,10 @@ function dislayWeatherInfo(data) {
     const tempDisplay = document.createElement("p");
     const humidityDisplay = document.createElement("p");
     const descriptionDisplay = document.createElement("p");
+    const countryDisplay = document.createElement("p");
 
     cityDisplay.textContent = city;
+    countryDisplay.textContent = country;
     tempDisplay.textContent = `Temperature: ${(temp - 273.15).toFixed(2)} °C`;
     humidityDisplay.textContent = `Humidity: ${humidity}%`;
     descriptionDisplay.textContent = `Condition: ${description}`;
@@ -52,8 +54,10 @@ function dislayWeatherInfo(data) {
     tempDisplay.classList.add("temperature");
     humidityDisplay.classList.add("humidity");
     descriptionDisplay.classList.add("condition");
+    countryDisplay.classList.add("country");
     
     card.appendChild(cityDisplay);
+    card.appendChild(countryDisplay);
     card.appendChild(tempDisplay);
     card.appendChild(humidityDisplay);
     card.appendChild(descriptionDisplay);
