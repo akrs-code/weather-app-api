@@ -30,6 +30,7 @@ async function getWeatherData(city) {
     return await response.json()
 
 }
+
 function dislayWeatherInfo(data) {
     console.log(data)
     const { name: city, main: { temp, humidity }, weather: [{ description }], sys:{country}} = data;
